@@ -1,22 +1,46 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import TodoList, {TaskType} from "./TodoList";
 
+
+export type FilterValuesType = 'all' | 'active' | 'completed'
+
 function App() {
-    const todoListTiTle_1 = 'What to learn';
-    const todoListTiTle_2 = 'What to buy';
-
-
-    const tasks_1: Array<TaskType> = [
+    //BLL:
+    const todoListTiTle = 'What to learn';
+    const [tasks, setTasks] = useState<Array<TaskType>>([// state,setState
         {id: 1, title: 'HTML', isDone: true},
         {id: 2, title: 'CSS', isDone: false},
-        {id: 3, title: 'JS/TS', isDone: false}
-    ]
-    const tasks_2: Array<TaskType> = [
-        {id: 1, title: 'milk', isDone: true},
-        {id: 2, title: 'sugar', isDone: false},
-        {id: 3, title: 'salt', isDone: false}
-    ]
+        {id: 3, title: 'JS/TS', isDone: false},
+        {id: 4, title: 'Redux', isDone: false}
+    ])
+
+    const removeTask = (taskID: number) => {
+        setTasks(tasks.filter(t => t.id !== taskID))
+        console.log(tasks)
+    }
+
+    const [filter, setFilter] = useState<FilterValuesType>("all")
+    const changeFilter = (filter: FilterValuesType) => {
+        setFilter(filter)
+        console.log(filter)
+    }
+
+
+//UI:
+
+
+    let tasksForRender;
+    switch (filter) {
+        case "completed":
+            tasksForRender = tasks.filter(t => t.isDone === false)
+            break
+        case "active":
+            tasksForRender = tasks.filter(t => t.isDone === true)
+            break
+        default:
+            tasksForRender = tasks
+    }
 
 
     return (
@@ -25,12 +49,10 @@ function App() {
         < div
             className="App">
             < TodoList
-                title={todoListTiTle_1}
-                tasks={tasks_1}
-            />
-            < TodoList
-                title={todoListTiTle_2}
-                tasks={tasks_2}
+                title={todoListTiTle}
+                tasks={tasksForRender}
+                removeTask={removeTask}
+                changeFilters={changeFilter}
             />
 
         </div>
