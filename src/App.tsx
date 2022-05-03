@@ -36,6 +36,13 @@ function App() {
         ]
     });
 
+
+const editTodoList = (todoListId: string, newTitle:string) => {
+    setTodolists(todoLists.map(el=>el.id === todoListId ? {...el, title: newTitle} : el))
+  
+}
+    
+    
     const addTodoList = (newTitle: string) => {
         let newID =v1()
         let newTodoList: TodolistType = {
@@ -112,7 +119,7 @@ function App() {
 
                         tasks={tasksForTodolist}
 
-
+                        editTodoList ={editTodoList}
                         removeTask={removeTask}
                         changeFilter={changeFilter}
                         addTask={addTask}
