@@ -1,6 +1,7 @@
-import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
+import React, {ChangeEvent} from 'react';
 import {FilterValuesType} from './App';
 import {FullInput} from "./components/FullInput";
+import {EditableSpan} from './components/EditableSpan';
 
 export type TaskType = {
     id: string
@@ -35,7 +36,7 @@ export function Todolist(props: PropsType) {
 
 
     return <div>
-        <h3> {props.title}
+        <h3> <EditableSpan callBack={()=>{}} title={props.title}/>
             <button onClick={removeTodolist}>x</button>
         </h3>
         <FullInput callBack={addTaskHandler}/>
