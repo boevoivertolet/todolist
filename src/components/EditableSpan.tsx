@@ -14,11 +14,11 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewTitle(e.currentTarget.value)
     }
-
     const onDoubleClickHandler = () => {
         setEdit(!edit)
         props.callBack(newTitle)
     }
+
 
 
     return (
